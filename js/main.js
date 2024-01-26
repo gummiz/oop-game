@@ -2,7 +2,7 @@
 
 class Player {
   constructor() {
-    this.positionX = 100;
+    this.positionX = 50;
     this.positionY = 800;
     this.height = 20;
     this.width = 20;
@@ -29,15 +29,21 @@ class Player {
     this.playerElm.style.left = this.positionX + "px";
   }
   moveLeft() {
-    this.positionX -= 20;
-    console.log("moving left", this.positionX);
-    this.playerElm.style.left = this.positionX + "px";
+    if (this.positionX > 0){
+      this.positionX -= 20;
+      console.log("moving left", this.positionX);
+      this.playerElm.style.left = this.positionX + "px";
+    } 
+    
   }
 
   moveRight() {
-    this.positionX += 20;
-    // console.log("moving right", this.positionX);
-    this.playerElm.style.left = this.positionX + "px";
+    if (this.positionX +this.width < 600){
+
+      this.positionX += 20;
+      // console.log("moving right", this.positionX);
+      this.playerElm.style.left = this.positionX + "px";
+    }
   }
 }
 
