@@ -35,19 +35,56 @@ class Player {
   }
 
   moveRight() {
-    this.positionX = this.positionX + 10;
-    console.log("moving right", this.positionX);
+    this.positionX += 10;
+    // console.log("moving right", this.positionX);
     this.playerElm.style.left = this.positionX + "px";
   }
 }
 
-const player = new Player();
+// OBstacales
+class Obstacales {
+  constructor() {
+    this.height = 30;
+    this.width = 100;
+    this.positionX = 50;
+    // this.positionY = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
+    this.positionY = Math.floor(Math.random() * (500 - 100 + 1)) + 100;
 
-window.addEventListener("keypress", (direction) => {
-  // if (direction.keyCode === 37) {
-  //   console.log("move left");
-  //   player.moveLeft();
-  // }
+    this.createObstical();
+  }
+
+  createObstical() {
+    // create dom element
+    this.obsticalElm = document.createElement("div");
+
+    // set Player Size
+    this.obsticalElm.setAttribute("class", "obstical");
+    this.obsticalElm.style.height = this.height + "px";
+    this.obsticalElm.style.width = this.width + "px";
+
+    //append to board
+    const boardElm = document.getElementById("board");
+    boardElm.appendChild(this.obsticalElm);
+
+    // set position of Player
+    this.obsticalElm.style.position = "absolute";
+    this.obsticalElm.style.top = this.positionY + "px";
+    this.obsticalElm.style.left = this.positionX + "px";
+  }
+
+  moveDown() {
+    this.positionY = this.positionY + 20;
+    this.obsticalElm.style.top = this.positionY + "px";
+  }
+
+  chechCollition() {}
+}
+
+const player = new Player();
+const obsticals = []; // will store instances of the class obstecales
+
+document.addEventListener("keydown", (direction) => {
+  console.log("key pressed");
 
   switch (direction.keyCode) {
     // left
@@ -62,4 +99,29 @@ window.addEventListener("keypress", (direction) => {
   }
 });
 
+// generate new obstacles
+setInterval(() => {
+  const newObstical = new Obstacales();
+  obsticals.push(newObstical);
+  console.log(obsticals);
+}, 3000);
 
+// move Obsticales each 50ms
+setInterval(() => {
+  obsticals.forEach((obsticalInstance) => {
+    //move down
+    obsticalInstance.moveDown();
+
+
+    // check if condition
+    if (
+      player.positionX < obsticalInstance.positionX + obsticalInstance.width &&
+      player.positionX + player.width > obsticalInstance.positionX &&
+      player.positionY < obsticalInstance.positionY + obsticalInstance.height &&
+      player.positionY + player.height > obsticalInstance.positionY
+    ) {
+      console.log("Collition");
+    }
+    // obsticals.chechCollition();
+  });
+}, 50);
