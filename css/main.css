@@ -20,5 +20,7 @@ input,select{vertical-align:middle}
     margin: 0;
     height: 100vh;
     width: 100vw;
-    background-color: aqua;
+
+    background: url("/src/background.webp") no-repeat ;
+    background-size: cover;
 }
