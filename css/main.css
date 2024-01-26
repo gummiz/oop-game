@@ -21,6 +21,14 @@ input,select{vertical-align:middle}
     height: 100vh;
     width: 100vw;
 
-    background: url("/src/background.webp") no-repeat ;
-    background-size: cover;
+    background: url("/src/background.webp") no-repeat bottom;
+    background-size: cover ;
+
+    position: relative;
+
+}
+
+#player {
+    background-color: #ff9;
+ 
 }
