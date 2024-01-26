@@ -3,7 +3,7 @@
 class Player {
   constructor() {
     this.positionX = 100;
-    this.positionY = 30;
+    this.positionY = 800;
     this.height = 20;
     this.width = 20;
 
@@ -25,17 +25,17 @@ class Player {
 
     // set position of Player
     this.playerElm.style.position = "absolute";
-    this.playerElm.style.bottom = this.positionY + "px";
+    this.playerElm.style.top = this.positionY + "px";
     this.playerElm.style.left = this.positionX + "px";
   }
   moveLeft() {
-    this.positionX -= 10;
+    this.positionX -= 20;
     console.log("moving left", this.positionX);
     this.playerElm.style.left = this.positionX + "px";
   }
 
   moveRight() {
-    this.positionX += 10;
+    this.positionX += 20;
     // console.log("moving right", this.positionX);
     this.playerElm.style.left = this.positionX + "px";
   }
@@ -46,9 +46,9 @@ class Obstacales {
   constructor() {
     this.height = 30;
     this.width = 100;
-    this.positionX = 50;
+    this.positionX =  Math.floor(Math.random() * (500 - 100 + 1) + 100);;
     // this.positionY = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
-    this.positionY = Math.floor(Math.random() * (500 - 100 + 1)) + 100;
+    this.positionY = 50
 
     this.createObstical();
   }
@@ -73,7 +73,7 @@ class Obstacales {
   }
 
   moveDown() {
-    this.positionY = this.positionY + 20;
+    this.positionY = this.positionY + 10;
     this.obsticalElm.style.top = this.positionY + "px";
   }
 
@@ -104,7 +104,7 @@ setInterval(() => {
   const newObstical = new Obstacales();
   obsticals.push(newObstical);
   console.log(obsticals);
-}, 3000);
+}, 1000);
 
 // move Obsticales each 50ms
 setInterval(() => {
@@ -121,7 +121,13 @@ setInterval(() => {
       player.positionY + player.height > obsticalInstance.positionY
     ) {
       console.log("Collition");
+       // obsticals.chechCollition();
+      //send user to a nother page
+      location.href= "result.html"
     }
-    // obsticals.chechCollition();
+
+    // remove element from array
+
+   
   });
 }, 50);
